@@ -21,15 +21,22 @@ public class TransactionalServiceImpl implements TransactionalService {
     private PriceService priceService;
 
     @Override
-    @GlobalTransactional
+    @GlobalTransactional(rollbackFor = Exception.class)
     public void insertDis(Product product) {
 
-        this.productService.add(product);
+        try {
+            this.productService.add(product);
 
-        Price price = new Price();
-        price.setProductId(product.getId());
-        price.setPrice(new BigDecimal(10000));
-        this.priceService.add(price);
+            Price price = new Price();
+            price.setProductId(product.getId());
+            price.setPrice(new BigDecimal(10000));
+            this.priceService.add(price);
+
+            int i = 1/0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("出现异常");
+        }
 
     }
 }

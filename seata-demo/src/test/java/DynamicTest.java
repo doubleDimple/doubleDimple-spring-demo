@@ -1,9 +1,9 @@
-import com.dpubleDimple.SeataApplication;
-import com.dpubleDimple.entity.pojo.Price;
-import com.dpubleDimple.entity.pojo.Product;
-import com.dpubleDimple.service.PriceService;
-import com.dpubleDimple.service.ProductService;
-import com.dpubleDimple.tx.TransactionalService;
+import com.seataDemo.SeataApplication;
+import com.seataDemo.entity.pojo.Price;
+import com.seataDemo.entity.pojo.Product;
+import com.seataDemo.service.PriceService;
+import com.seataDemo.service.ProductService;
+import com.seataDemo.tx.TransactionalService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

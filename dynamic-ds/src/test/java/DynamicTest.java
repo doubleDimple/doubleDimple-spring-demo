@@ -1,8 +1,8 @@
-import com.dpubleDimple.Application;
-import com.dpubleDimple.entity.pojo.Price;
-import com.dpubleDimple.entity.pojo.Product;
-import com.dpubleDimple.service.PriceService;
-import com.dpubleDimple.service.ProductService;
+import com.doubleDimple.Application;
+import com.doubleDimple.entity.pojo.Price;
+import com.doubleDimple.entity.pojo.Product;
+import com.doubleDimple.service.PriceService;
+import com.doubleDimple.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

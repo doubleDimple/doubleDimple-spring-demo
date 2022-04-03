@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.seataDemo.mapper.dao2.PriceMapper">
+<mapper namespace="com.igniteDemo.mapper.dao1.ProductMapper">
 
 	<!--实体映射-->
-	<resultMap id="base_result_map" type="com.seataDemo.entity.pojo.Price">
+	<resultMap id="base_result_map" type="com.igniteDemo.entity.pojo.Product">
 		<!--主键-->
 		<id column="id" property="id"  />
-
-		<id column="product_id" property="productId"  />
-		<!--价格-->
-		<result column="price" property="price"  />
+		<!--名称-->
+		<result column="name" property="name"  />
 		<!---->
 		<result column="create_time" property="createTime"  />
 		<!---->
@@ -20,18 +18,15 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="base_column_list">
-		 `id`,`product_id`,`price`,`create_time`,`update_time`
+		 `id`,`name`,`create_time`,`update_time`
 	</sql>
 
 	<sql id="base_condition_filed">
 			<if test="id != null">
 				 and  `id` = #{id}
 			</if>
-			<if test="productId != null">
-				and  `product_id` = #{productId}
-			</if>
-			<if test="price != null">
-				 and  `price` = #{price}
+			<if test="name != null and name !=''">
+				 and  `name` = #{name}
 			</if>
 			<if test="createTime != null">
 				 and  `create_time` = #{createTime}
@@ -49,6 +44,9 @@
 	<sql id="query_condition">
 	 <where>
 			<include refid="base_condition_filed" />
+			<if test="nameFuzzy != null  and nameFuzzy != ''">
+				 and  `name` like concat('%', #{nameFuzzy}, '%')
+			</if>
 			<if test="createTimeStart != null and createTimeStart !='' ">
 				 <![CDATA[ and  `create_time`>=str_to_date('${createTimeStart}', '%Y-%m-%d') ]]>
 			</if>
@@ -66,7 +64,7 @@
 
 	<!-- 查询集合-->
 	<select id="selectList" resultMap="base_result_map" >
-		 SELECT <include refid="base_column_list" /> FROM `price` <include refid="query_condition" />
+		 SELECT <include refid="base_column_list" /> FROM `product` <include refid="query_condition" />
 		 <if test="orderBy!=null">
 			 order by ${orderBy}
 		 </if>
@@ -77,22 +75,19 @@
 
 	<!-- 查询数量-->
 	<select id="selectCount" resultType="java.lang.Integer" >
-		 SELECT count(1) FROM `price` <include refid="query_condition" />
+		 SELECT count(1) FROM `product` <include refid="query_condition" />
 	</select>
 
 	<!-- 插入 （匹配有值的字段）-->
-	<insert id="insert" parameterType="com.seataDemo.entity.pojo.Price">
+	<insert id="insert" parameterType="com.igniteDemo.entity.pojo.Product">
 		<selectKey keyProperty="id" resultType="Long" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		 INSERT INTO `price`
+		 INSERT INTO `product`
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="price != null">
-				 `price`,
+			<if test="name != null">
+				 `name`,
 			</if>
-			 <if test="productId != null">
-				 `product_id`,
-			 </if>
 			<if test="createTime != null">
 				 `create_time`,
 			</if>
@@ -101,12 +96,9 @@
 			</if>
 		 </trim>
 		 <trim prefix="values (" suffix=")" suffixOverrides="," >
-			<if test="price!=null">
-				 #{price},
+			<if test="name!=null">
+				 #{name},
 			</if>
-			 <if test="productId!=null">
-				 #{productId},
-			 </if>
 			<if test="createTime!=null">
 				 #{createTime},
 			</if>
@@ -117,27 +109,24 @@
 	</insert>
 
 	<!-- 插入 （根据表名称插入）-->
-	<insert id="insertWidthTableName" parameterType="com.seataDemo.entity.pojo.Price">
+	<insert id="insertWidthTableName" parameterType="com.igniteDemo.entity.pojo.Product">
 		<selectKey keyProperty="bean.id" resultType="Long" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		 INSERT INTO `${tableName}`(`price`,`create_time`,`update_time`)values(
-			 #{bean.price},#{bean.createTime},#{bean.updateTime})
+		 INSERT INTO `${tableName}`(`name`,`create_time`,`update_time`)values(
+			 #{bean.name},#{bean.createTime},#{bean.updateTime})
 		ON DUPLICATE KEY UPDATE 
-		`price` = values(`price`),`create_time` = values(`create_time`),`update_time` = values(`update_time`)
+		`name` = values(`name`),`create_time` = values(`create_time`),`update_time` = values(`update_time`)
 	</insert>
 
 	<!-- 添加 （批量插入或修改）-->
-		<insert id="insertBatch" parameterType="com.seataDemo.entity.pojo.Price">
-		 INSERT INTO `price`
+		<insert id="insertBatch" parameterType="com.igniteDemo.entity.pojo.Product">
+		 INSERT INTO `product`
 		 <trim prefix="(" suffix=")" suffixOverrides=",">
 			`id`,
-		 <if test="list[0].price!= null">
-		 `price`,
+		 <if test="list[0].name!= null">
+		 `name`,
 		 </if>
-			 <if test="list[0].product_id!= null">
-				 `product_id`,
-			 </if>
 		 <if test="list[0].create_time!= null">
 		 `create_time`,
 		 </if>
@@ -149,12 +138,9 @@
 			 <foreach collection="list" item="item" separator=",">
 			<trim prefix="(" suffix=")" suffixOverrides=",">
 			#{item.id},
-		 <if test="list[0].price!= null">
-		 #{item.price},
+		 <if test="list[0].name!= null">
+		 #{item.name},
 		 </if>
-				<if test="list[0].product_id!= null">
-					#{productId},
-				</if>
 		 <if test="list[0].create_time!= null">
 		 #{item.createTime},
 		 </if>
@@ -167,12 +153,9 @@
 		ON DUPLICATE KEY UPDATE 
 		
 		<trim suffixOverrides="," >
-		 <if test="list[0].price!= null">
-		 `price`= values(`price`),
+		 <if test="list[0].name!= null">
+		 `name`= values(`name`),
 		 </if>
-			<if test="list[0].product_id!= null">
-				`product_id`= values(`product_id`),
-			</if>
 		 <if test="list[0].create_time!= null">
 		 `create_time`= values(`create_time`),
 		 </if>
@@ -184,15 +167,12 @@
 		</insert>
 
 	<!-- 根据PrimaryKey修 改-->
-	<update id="updateByPrimaryKey" parameterType="com.seataDemo.entity.pojo.Price">
-		 UPDATE `price`
+	<update id="updateByPrimaryKey" parameterType="com.igniteDemo.entity.pojo.Product">
+		 UPDATE `product`
  		 <set> 
-			<if test="bean.price != null">
-				 `price` = #{bean.price},
+			<if test="bean.name != null">
+				 `name` = #{bean.name},
 			</if>
-			 <if test="bean.productId != null">
-				 `product_id` = #{bean.productId},
-			 </if>
 			<if test="bean.createTime != null">
 				 `create_time` = #{bean.createTime},
 			</if>
@@ -205,12 +185,12 @@
 
 	<!-- 根据PrimaryKey删除-->
 	<delete id="deleteByPrimaryKey">
-		delete from `price` where `id`=#{id}
+		delete from `product` where `id`=#{id}
 	</delete>
 
 	<!-- 根据PrimaryKey获取对象-->
 	<select id="selectByPrimaryKey" resultMap="base_result_map" >
-		select <include refid="base_column_list" /> from `price` where `id`=#{id}
+		select <include refid="base_column_list" /> from `product` where `id`=#{id}
 	</select>
 
 </mapper>

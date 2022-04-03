@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dpubleDimple.mapper.dao1.ProductMapper">
+<mapper namespace="com.seataDemo.mapper.dao1.ProductMapper">
 
 	<!--实体映射-->
-	<resultMap id="base_result_map" type="com.dpubleDimple.entity.pojo.Product">
+	<resultMap id="base_result_map" type="com.seataDemo.entity.pojo.Product">
 		<!--主键-->
 		<id column="id" property="id"  />
 		<!--名称-->
@@ -79,7 +79,7 @@
 	</select>
 
 	<!-- 插入 （匹配有值的字段）-->
-	<insert id="insert" parameterType="com.dpubleDimple.entity.pojo.Product">
+	<insert id="insert" parameterType="com.seataDemo.entity.pojo.Product">
 		<selectKey keyProperty="id" resultType="Long" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -109,7 +109,7 @@
 	</insert>
 
 	<!-- 插入 （根据表名称插入）-->
-	<insert id="insertWidthTableName" parameterType="com.dpubleDimple.entity.pojo.Product">
+	<insert id="insertWidthTableName" parameterType="com.seataDemo.entity.pojo.Product">
 		<selectKey keyProperty="bean.id" resultType="Long" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -120,7 +120,7 @@
 	</insert>
 
 	<!-- 添加 （批量插入或修改）-->
-		<insert id="insertBatch" parameterType="com.dpubleDimple.entity.pojo.Product">
+		<insert id="insertBatch" parameterType="com.seataDemo.entity.pojo.Product">
 		 INSERT INTO `product`
 		 <trim prefix="(" suffix=")" suffixOverrides=",">
 			`id`,
@@ -167,7 +167,7 @@
 		</insert>
 
 	<!-- 根据PrimaryKey修 改-->
-	<update id="updateByPrimaryKey" parameterType="com.dpubleDimple.entity.pojo.Product">
+	<update id="updateByPrimaryKey" parameterType="com.seataDemo.entity.pojo.Product">
 		 UPDATE `product`
  		 <set> 
 			<if test="bean.name != null">

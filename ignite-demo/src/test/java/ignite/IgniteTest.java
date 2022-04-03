@@ -1,18 +1,13 @@
 package ignite;
 
-
-
 import com.igniteDemo.IgniteApplication;
 import com.igniteDemo.cache.IgniteContext;
 import com.igniteDemo.entity.pojo.Product;
 import org.apache.ignite.IgniteCache;
-import org.apache.ignite.cache.query.Query;
-import org.apache.ignite.cache.query.SqlQuery;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.Date;
 
 @SpringBootTest(classes = IgniteApplication.class)

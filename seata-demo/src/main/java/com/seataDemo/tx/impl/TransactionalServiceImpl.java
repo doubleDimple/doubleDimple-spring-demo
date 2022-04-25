@@ -32,7 +32,6 @@ public class TransactionalServiceImpl implements TransactionalService {
             price.setPrice(new BigDecimal(10000));
             this.priceService.add(price);
 
-            int i = 1/0;
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("出现异常");

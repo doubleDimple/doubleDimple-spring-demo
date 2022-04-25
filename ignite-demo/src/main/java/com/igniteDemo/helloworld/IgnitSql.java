@@ -3,6 +3,7 @@ package com.igniteDemo.helloworld;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
+import org.apache.ignite.IgniteJdbcThinDataSource;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.cache.CacheAtomicityMode;
 import org.apache.ignite.cache.QueryEntity;
@@ -18,6 +19,9 @@ import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.multicast.TcpDiscoveryMulticastIpFinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.ApplicationContextFactory;
+
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,7 +34,7 @@ import static org.apache.ignite.cache.CacheMode.PARTITIONED;
 public class IgnitSql {
     private static final Logger LOGGER = LoggerFactory.getLogger(IgnitSql.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Ignite ignite = getIgnite();
 
         //handlerr select
@@ -51,7 +55,7 @@ public class IgnitSql {
         IgniteCache<String, Map<String, Object>> cache1 = ignite.getOrCreateCache("person");
     }
 
-    private static Ignite getIgnite() {
+    private static Ignite getIgnite() throws SQLException {
         // Preparing IgniteConfiguration using Java APIs
         IgniteConfiguration cfg = new IgniteConfiguration();
 
@@ -88,7 +92,7 @@ public class IgnitSql {
 
         //持久化类
         CacheJdbcPojoStoreFactory<Object, Object> storeFactory = new CacheJdbcPojoStoreFactory<>();
-        storeFactory.setDataSourceBean(getDatasource());
+        storeFactory.setDataSourceBean("ds1DataSourceIgnite");
         storeFactory.setDialect(new BasicJdbcDialect());
 
         LinkedHashMap<String, String> fieldMap = new LinkedHashMap<>();
@@ -124,10 +128,5 @@ public class IgnitSql {
         cacheConfiguration.setQueryEntities(Collections.singleton(queryEntity));
         ignite.getOrCreateCache(cacheConfiguration);
         return ignite;
-    }
-
-    private static String getDatasource() {
-         DruidDataSource druidDataSource = new DruidDataSource();
-         return null;
     }
 }

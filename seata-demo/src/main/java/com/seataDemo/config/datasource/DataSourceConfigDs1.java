@@ -26,6 +26,7 @@ public class DataSourceConfigDs1 {
     private String password;
 
      @Bean(name="ds1DataSource")
+     @Primary
      public DataSource ds1DataSource() {
          DruidDataSource dataSource = new DruidDataSource();
          dataSource.setUrl(url);

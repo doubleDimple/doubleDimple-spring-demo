@@ -35,13 +35,11 @@ public class DataSourceConfigDs2 {
      }
 
     @Bean
-    @Primary
     public DataSourceTransactionManager ds2TransactionManager(@Qualifier("ds2DataSource") DataSource dataSource) {
          return new DataSourceTransactionManager(dataSource);
      }
 
      @Bean
-     @Primary
      public SqlSessionFactory ds2SqlSessionFactory(@Qualifier("ds2DataSource") DataSource ds2DataSource) throws Exception {
          final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
          sessionFactory.setDataSource(ds2DataSource);

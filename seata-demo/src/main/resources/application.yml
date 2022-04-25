@@ -23,6 +23,7 @@ seata:
       data-validation: true # 二阶段回滚镜像校验（默认true开启）
       log-serialization: jackson # undo序列化方式（默认jackson）
       log-table: undo_log  # 自定义undo表名（默认undo_log）
+      ignoreNocheckColumns: '{"product":"123,456","price":"123,456"}'
   service:
     vgroupMapping:
       my-tx-group: seata-server

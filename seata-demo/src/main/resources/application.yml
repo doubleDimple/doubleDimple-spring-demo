@@ -20,10 +20,11 @@ seata:
       commit-retry-count:   3 # 一阶段全局提交结果上报TC重试次数（默认1次，建议大于1）
       rollback-retry-count: 3 # 一阶段全局回滚结果上报TC重试次数（默认1次，建议大于1）
     undo:
-      data-validation: true # 二阶段回滚镜像校验（默认true开启）
+      data-validation: false # 二阶段回滚镜像校验（默认true开启）
       log-serialization: jackson # undo序列化方式（默认jackson）
       log-table: undo_log  # 自定义undo表名（默认undo_log）
-      ignoreNocheckColumns: '{"product":"123,456","price":"123,456"}'
+      ignoreNocheckColumns: '{"`product`":"`name`","`price`":"`productId`"}'
+      onlyCareUpdateColumns: true
   service:
     vgroupMapping:
       my-tx-group: seata-server

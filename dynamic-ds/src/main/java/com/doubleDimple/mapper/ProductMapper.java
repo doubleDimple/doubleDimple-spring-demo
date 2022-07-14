@@ -1,6 +1,7 @@
-package com.doubleDimple.mapper.dao1;
+package com.doubleDimple.mapper;
 
 import com.doubleDimple.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**

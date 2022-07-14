@@ -1,4 +1,5 @@
 import com.doubleDimple.Application;
+import com.doubleDimple.entity.page.PaginationResult;
 import com.doubleDimple.entity.pojo.Price;
 import com.doubleDimple.entity.pojo.Product;
 import com.doubleDimple.service.PriceService;
@@ -15,14 +16,14 @@ public class DynamicTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicTest.class);
 
-    @Resource
+    @Autowired
     private ProductService productService;
 
     @Autowired
     private PriceService priceService;
 
     @Test public void testQuery(){
-        final Price price = this.priceService.getPriceByPrimaryKey(1L);
+        final Price price = priceService.getPriceByPrimaryKey(1L);
         final Product product = productService.getProductByPrimaryKey(1L);
         LOGGER.info("price is:[{}]",price.toString());
         LOGGER.info("product is:[{}]",product.toString());

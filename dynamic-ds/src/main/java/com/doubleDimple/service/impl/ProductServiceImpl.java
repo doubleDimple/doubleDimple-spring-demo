@@ -9,7 +9,7 @@ import com.doubleDimple.entity.page.PaginationResult;
 import com.doubleDimple.entity.page.SimplePage;
 import com.doubleDimple.entity.pojo.Product;
 import com.doubleDimple.entity.query.ProductQuery;
-import com.doubleDimple.mapper.dao1.ProductMapper;
+import com.doubleDimple.mapper.ProductMapper;
 import com.doubleDimple.service.ProductService;
 import org.springframework.stereotype.Service;
 

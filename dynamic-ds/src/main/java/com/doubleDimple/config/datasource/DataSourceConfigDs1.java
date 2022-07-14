@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 import static com.doubleDimple.config.datasource.constant.MAPPER_XML_LOCATION_DS1;
 
-@Configuration
+/*@Configuration
 @MapperScan(basePackages = constant.MAPPER_DS1, sqlSessionFactoryRef = "ds1SqlSessionFactory")
 public class DataSourceConfigDs1 {
 
@@ -50,4 +50,4 @@ public class DataSourceConfigDs1 {
                                  .getResources(MAPPER_XML_LOCATION_DS1));
          return sessionFactory.getObject();
      }
-}
+}*/

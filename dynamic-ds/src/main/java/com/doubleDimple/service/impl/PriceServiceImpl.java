@@ -4,12 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.doubleDimple.entity.enums.PageSize;
 import com.doubleDimple.entity.page.PaginationResult;
 import com.doubleDimple.entity.page.SimplePage;
 import com.doubleDimple.entity.pojo.Price;
 import com.doubleDimple.entity.query.PriceQuery;
-import com.doubleDimple.mapper.dao2.PriceMapper;
+import com.doubleDimple.mapper.PriceMapper;
 import com.doubleDimple.service.PriceService;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,8 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service("priceService")
-public class PriceServiceImpl implements PriceService {
+@DS("slave_1")
+public class PriceServiceImpl  implements PriceService {
 
 	@Resource
 	private PriceMapper<Price, PriceQuery> priceMapper;

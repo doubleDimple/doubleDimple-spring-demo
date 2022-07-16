@@ -4,7 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
+import com.doubleDimple.annoation.DynamicDS;
+import com.doubleDimple.constants.DataSourceConstants;
 import com.doubleDimple.entity.enums.PageSize;
 import com.doubleDimple.entity.page.PaginationResult;
 import com.doubleDimple.entity.page.SimplePage;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service("priceService")
-@DS("slave_1")
+@DynamicDS(DataSourceConstants.DS_KEY_SLAVE)
 public class PriceServiceImpl  implements PriceService {
 
 	@Resource

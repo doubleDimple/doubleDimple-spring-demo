@@ -4,16 +4,5 @@ server:
 spring:
   application:
     name: dynamic-ds
-  datasource:
-    dynamic:
-      primary: master
-      strict: false
-      datasource:
-        master:
-          url: jdbc:mysql://localhost:3306/ds1?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-          username: root
-          password: root
-        slave_1:
-          url: jdbc:mysql://localhost:3306/ds2?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-          username: root
-          password: root
+mybatis:
+  mapper-locations: classpath*:/mapper/*.xml

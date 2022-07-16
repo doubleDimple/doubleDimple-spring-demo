@@ -20,8 +20,8 @@ public class TestController {
 
     @RequestMapping("/test/query")
     public String getPrice(){
+        Product productByPrimaryKey = productService.getProductByPrimaryKey(11L);
         Price priceByPrimaryKey = priceService.getPriceByPrimaryKey(1l);
-        Product productByPrimaryKey = productService.getProductByPrimaryKey(1L);
         System.out.println(priceByPrimaryKey);
         return priceByPrimaryKey.toString();
     }

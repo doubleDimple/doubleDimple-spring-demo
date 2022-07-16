@@ -1,5 +1,4 @@
-import com.doubleDimple.Application;
-import com.doubleDimple.entity.page.PaginationResult;
+import com.doubleDimple.DynamicApplication;
 import com.doubleDimple.entity.pojo.Price;
 import com.doubleDimple.entity.pojo.Product;
 import com.doubleDimple.service.PriceService;
@@ -9,9 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import javax.annotation.Resource;
 
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = DynamicApplication.class)
 public class DynamicTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicTest.class);
@@ -23,8 +21,8 @@ public class DynamicTest {
     private PriceService priceService;
 
     @Test public void testQuery(){
-        final Price price = priceService.getPriceByPrimaryKey(1L);
         final Product product = productService.getProductByPrimaryKey(1L);
+        final Price price = priceService.getPriceByPrimaryKey(1L);
         LOGGER.info("price is:[{}]",price.toString());
         LOGGER.info("product is:[{}]",product.toString());
     }

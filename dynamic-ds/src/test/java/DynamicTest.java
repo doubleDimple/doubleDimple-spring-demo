@@ -3,16 +3,17 @@ import com.doubleDimple.entity.pojo.Price;
 import com.doubleDimple.entity.pojo.Product;
 import com.doubleDimple.service.PriceService;
 import com.doubleDimple.service.ProductService;
-import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest(classes = DynamicApplication.class)
+@Slf4j
 public class DynamicTest {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicTest.class);
 
     @Autowired
     private ProductService productService;
@@ -20,10 +21,11 @@ public class DynamicTest {
     @Autowired
     private PriceService priceService;
 
-    @Test public void testQuery(){
-        final Product product = productService.getProductByPrimaryKey(1L);
+    @Test
+    public void testQuery(){
+        final Product product = productService.getProductByPrimaryKey(11L);
         final Price price = priceService.getPriceByPrimaryKey(1L);
-        LOGGER.info("price is:[{}]",price.toString());
-        LOGGER.info("product is:[{}]",product.toString());
+        log.info("price is:[{}]",price.toString());
+        log.info("product is:[{}]",product.toString());
     }
 }

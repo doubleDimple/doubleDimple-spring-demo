@@ -1,0 +1,17 @@
+server:
+  port: 8097
+
+spring:
+  application:
+    name: activity-demo
+  datasource:
+      url: jdbc:mysql://localhost:3306/activity-demo?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+      username: root
+      password: root
+
+  #工作流配置
+flowable:
+  #关闭定时任务JOB
+  async-executor-activate: false
+  # 将databaseSchemaUpdate设置为true。当Flowable发现库与数据库表结构不一致时，会自动将数据库表结构升级至新版本。
+  database-schema-update: true

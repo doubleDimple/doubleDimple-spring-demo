@@ -5,16 +5,13 @@ import com.seataDemo.service.PriceService;
 import com.seataDemo.service.ProductService;
 import com.seataDemo.tx.TransactionalService;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 
+@lombok.extern.slf4j.Slf4j
 @SpringBootTest(classes = SeataApplication.class)
 public class DynamicTest {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicTest.class);
 
     @Resource
     private ProductService productService;
@@ -28,8 +25,8 @@ public class DynamicTest {
     @Test public void testQuery(){
         final Price price = this.priceService.getPriceByPrimaryKey(1L);
         final Product product = productService.getProductByPrimaryKey(1L);
-        LOGGER.info("price is:[{}]",price.toString());
-        LOGGER.info("product is:[{}]",product.toString());
+        log.info("price is:[{}]",price.toString());
+        log.info("product is:[{}]",product.toString());
     }
 
     @Test

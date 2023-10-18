@@ -4,5 +4,8 @@ server:
 spring:
   application:
     name: dynamic-ds
+  cloud:
+    compatibility-verifier:
+      enabled: false
 mybatis:
   mapper-locations: classpath*:/mapper/*.xml

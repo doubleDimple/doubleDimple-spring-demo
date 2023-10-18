@@ -1,0 +1,27 @@
+server:
+  port: 8096
+
+spring:
+  application:
+    name: activity-demo
+  datasource:
+      url: jdbc:mysql://localhost:3306/activity-demo?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+      username: root
+      password: root
+
+  #工作流配置
+  activiti:
+    #false：false为默认值，设置为该值后，Activiti在启动时，会对比数据库表中保存的版本，如果版本不匹配时，将在启动时抛出异常。
+    #true：设置为该值后，Activiti会对数据库中所有的表进行更新，如果表不存在，则Activiti会自动创建。
+    #create-drop：Activiti启动时，会执行数据库表的创建操作，在Activiti关闭时，执行数据库表的删除操作。
+    #drop-create：Activiti启动时，执行数据库表的删除操作在Activiti关闭时，会执行数据库表的创建操作。
+    database-schema-update: true
+    #none：不保存任何的历史数据，因此，在流程执行过程中，这是最高效的。
+    #activity：级别高于none，保存流程实例与流程行为，其他数据不保存。
+    #audit：除activity级别会保存的数据外，还会保存全部的流程任务及其属性。audit为history的默认值。
+    #full：保存历史数据的最高级别，除了会保存audit级别的数据外，还会保存其他全部流程相关的细节数据，包括一些流程参数等。
+    history-level: full
+    ##关闭activiti自动部署（使用流程设计器部署，不使用具体文件访问方式）
+    check-process-definitions: true
+    #检测历史表是否存在，acticit7默认没有开启历史记录信息
+    db-history-used: true
